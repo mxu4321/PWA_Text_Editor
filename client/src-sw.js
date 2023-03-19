@@ -31,7 +31,8 @@ registerRoute(
   // --- ❄️ added code ⤵️ ---
   ({ request }) => ["style", "script", "worker"].includes(request.destination),
   new StaleWhileRevalidate({
-    cacheName: "asset-cache",
+    // ⏰TODO: check the cacheName
+    cacheName: "jate-cache",
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
