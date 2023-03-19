@@ -12,6 +12,11 @@ module.exports = () => {
     entry: {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
+      // --- ❄️ added code ⤵️ ---
+      database: "./src/js/database.js",
+      editor: "./src/js/editor.js",
+      header: "./src/js/header.js",
+      // --- ❄️ added code ⤴️ ---
     },
     output: {
       filename: "[name].bundle.js",
@@ -31,14 +36,13 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        // --- ❄️ TODO: review code ⤵️ ---
-        name: "text-editor",
-        short_name: "JATE",
-        description: "Just Another Text Editor!",
-        background_color: "#225ca3",
+        name: "Just Another Text Editor",
+        short_name: "J.A.T.E",
+        description: "Takes notes with JavaScript syntax highlighting!",
         theme_color: "#225ca3",
-        start_url: "./",
-        publicPath: "./",
+        background_color: "#225ca3",
+        start_url: "/",
+        publicPath: "/",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
@@ -53,17 +57,18 @@ module.exports = () => {
     module: {
       rules: [
         // --- ❄️ added code ⤵️ ---
-        {
+        { // css loaders
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
         },
         {
-          test: /\.js$/,
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env"],
+              plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"],
             },
           },
         },
