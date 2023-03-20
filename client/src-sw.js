@@ -32,10 +32,14 @@ registerRoute(
   ({ request }) => ["style", "script", "worker"].includes(request.destination),
   new StaleWhileRevalidate({
     // ⏰TODO: check the cacheName
-    cacheName: "jate-cache",
+    cacheName: "asset-cache",
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        // expire after 30 days
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   })

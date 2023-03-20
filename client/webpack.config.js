@@ -26,7 +26,6 @@ module.exports = () => {
       // --- ❄️ added code ⤵️ ---
       new HtmlWebpackPlugin({
         template: "./index.html",
-        //⏰TODO: check the title
         title: "JATE",
       }),
       new InjectManifest({
